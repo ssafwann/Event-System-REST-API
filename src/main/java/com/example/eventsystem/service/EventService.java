@@ -1,18 +1,15 @@
 package com.example.eventsystem.service;
 
 
+import com.example.eventsystem.model.Booking;
 import com.example.eventsystem.model.Event;
 import com.example.eventsystem.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.events.EventException;
 
 import javax.transaction.Transactional;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -21,10 +18,12 @@ import java.util.Optional;
 public class EventService {
 
     private final EventRepository eventRepository;
+    private final BookingService bookingService;
 
     @Autowired
-    public EventService(EventRepository eventRepository) {
+    public EventService(EventRepository eventRepository, BookingService bookingService) {
         this.eventRepository = eventRepository;
+        this.bookingService = bookingService;
     }
 
     public List<Event> getEventList() {
@@ -38,7 +37,7 @@ public class EventService {
 
 
     public void addNewEvent(Event event) {
-        Optional<Event> eventOptional = eventRepository.findEventByName(event.getName()); // ctrl alt v
+        Optional<Event> eventOptional = eventRepository.findEventByName(event.getName());
         if (eventOptional.isPresent()) {
             throw new IllegalStateException("The event name is already taken");
         }
@@ -51,6 +50,15 @@ public class EventService {
         if (!exists) {
             throw new IllegalStateException(
                     "event with id " + eventId + " does not exist");
+        }
+        else {
+            // delete all the event bookings
+            List <Booking> allBookings = bookingService.getBookingList();
+            for (int i=0 ; i < allBookings.size(); i++) {
+                if (allBookings.get(i).getEventBooked().getId() == eventId) {
+                    bookingService.deleteBooking(allBookings.get(i).getId());
+                }
+            }
         }
         eventRepository.deleteById(eventId);
     }

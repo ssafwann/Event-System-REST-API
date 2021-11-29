@@ -77,7 +77,7 @@ public class Config {
     @Order(0)
     CommandLineRunner loadEvents(EventRepository repository) {
         return args -> {
-            Event bachelorSharing = new Event(
+            Event event1 = new Event(
                     "Sharing on Bachelor Degree Experience",
                     LocalDate.of(2021, Month.NOVEMBER, 05),
                     LocalTime.of(14,30),
@@ -85,7 +85,7 @@ public class Config {
                     30
             );
 
-            Event resumeWritingWorkshop = new Event(
+            Event event2 = new Event(
                     "Resume Writing Workshop",
                     LocalDate.of(2021, Month.DECEMBER, 05),
                     LocalTime.of(18,00),
@@ -93,7 +93,7 @@ public class Config {
                     0
             );
 
-            Event programmingWorkshop = new Event(
+            Event event3 = new Event(
                     "Learn HTML workshop",
                     LocalDate.of(2021, Month.OCTOBER, 15),
                     LocalTime.of(14,30),
@@ -101,7 +101,7 @@ public class Config {
                     50
             );
 
-            Event alumniSharing = new Event(
+            Event event4 = new Event(
                     "Sharing from alumni",
                     LocalDate.of(2021, Month.NOVEMBER, 20),
                     LocalTime.of(10,00),
@@ -109,8 +109,25 @@ public class Config {
                     0
             );
 
+            Event event5 = new Event(
+                    "IELTS training",
+                    LocalDate.of(2021, Month.DECEMBER, 10),
+                    LocalTime.of(16,30),
+                    "40",
+                    120
+            );
+
+            Event event6 = new Event(
+                    "Sharing from chancellor",
+                    LocalDate.of(2021, Month.NOVEMBER, 25),
+                    LocalTime.of(10,00),
+                    "80",
+                    0
+            );
+
+
             repository.saveAll(
-                    List.of(bachelorSharing,resumeWritingWorkshop,programmingWorkshop, alumniSharing)
+                    List.of(event1, event2, event3, event4, event5, event6)
             );
         };
     }

@@ -28,13 +28,15 @@ public class BookingController {
         return bookingService.getSingleBooking(bookingId);}
 
 
-
-    /*
     @GetMapping(path = "/user/{userId}")
     public List<Booking> getUserBookings(@PathVariable("userId") Long userId) {
         return bookingService.getBookingByUser(userId);}
 
-    */
+    @GetMapping(path = "/event/{eventId}")
+    public List<Booking> getEventBookings(@PathVariable("eventId") Long eventId) {
+        return bookingService.getEventBookings(eventId);}
+
+
 
     @PostMapping
     public void registerNewBooking(@RequestBody Booking booking) {

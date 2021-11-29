@@ -1,5 +1,6 @@
 package com.example.eventsystem.service;
 
+import com.example.eventsystem.model.Booking;
 import com.example.eventsystem.model.User;
 import com.example.eventsystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,12 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, BookingService bookingService) {
         this.userRepository = userRepository;
+        this.bookingService = bookingService;
     }
+
+    private final BookingService bookingService;
 
 
     public List<User> getUser() {
@@ -44,6 +48,15 @@ public class UserService {
         if (! exists) {
             throw new IllegalStateException(
                     "user with id " + userId + " does not exist");
+        }
+        else {
+            // delete the user bookings as well
+            List <Booking> allBookings = bookingService.getBookingList();
+            for (int i=0 ; i < allBookings.size(); i++) {
+                if (allBookings.get(i).getUserBooked().getId() == userId) {
+                    bookingService.deleteBooking(allBookings.get(i).getId());
+                }
+            }
         }
         userRepository.deleteById(userId);
     }

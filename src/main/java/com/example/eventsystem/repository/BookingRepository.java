@@ -5,18 +5,21 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
-// TODO: need to implement way to get all bookings made by a certain user
-// TODO: need to implement way to get all the bookings for a single event
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long > {
 
-    @Query
+    @Query()
     Optional<Booking> findBookingById(Long id);
 
+    @Query(value = "SELECT * from bookings, user where bookings.user_id = :id", nativeQuery = true)
+    List<Booking> findByUserid(Long id);
 
+    @Query(value = "SELECT * from bookings, user where bookings.event_id = :id", nativeQuery = true)
+    List<Booking> findByEventid(Long id);
 
 }

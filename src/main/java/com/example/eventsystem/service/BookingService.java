@@ -12,18 +12,12 @@ import java.util.*;
 @Service
 public class BookingService {
 
-   private final BookingRepository bookingRepository;
-
-   @Autowired
-   private UserRepository userRepository;
-   @Autowired
-   private UserService userService;
+    private final BookingRepository bookingRepository;
 
     @Autowired
     public BookingService(BookingRepository bookingRepository) {
         this.bookingRepository = bookingRepository;
     }
-
 
     public List<Booking> getBookingList() {
         return bookingRepository.findAll();
@@ -33,21 +27,24 @@ public class BookingService {
         return bookingRepository.findBookingById(bookingId).orElseThrow();
     }
 
-    /*
-    public List<Booking> getAllBookingsByUser(Long userId) {
-        List <Booking> bookings = getBookingList(); // give us all bookings
-        List <Booking> userBookings = null;
-        List <User> allUsers = userService.getUser();
-
-        for (int i = 0 ; i < bookings.size(); i++) {
-            if (bookings.get(i).getUserBooked().getId() == allUsers.get(i).getId()) {
-                userBookings.add(bookings.get(i));
-               // userBookings.add(bookings.get(i));
-            }
+    public List<Booking> getBookingByUser(Long userId) {
+        if (bookingRepository.findByUserid(userId).isEmpty()) {
+            throw new IllegalStateException("The user with id " + userId + " has made no bookings.");
         }
-        return userBookings;
+        else {
+            return bookingRepository.findByUserid(userId);
+        }
     }
-    */
+
+    public List<Booking> getEventBookings(Long eventId) {
+        if (bookingRepository.findByEventid(eventId).isEmpty()) {
+            throw new IllegalStateException("The event with id " + eventId + " has no bookings.");
+        }
+        else {
+            return bookingRepository.findByEventid(eventId);
+        }
+    }
+
 
     public void addNewBooking(Booking booking) {
         Optional<Booking> bookingOptional = bookingRepository.findBookingById(booking.getId());
@@ -82,4 +79,7 @@ public class BookingService {
                     "The update was unsuccessful, try entering another amount" );
         }
     }
+
+
+
 }
