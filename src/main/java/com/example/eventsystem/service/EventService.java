@@ -41,6 +41,7 @@ public class EventService {
         }
         eventRepository.save(event);
         System.out.println(event);
+
     }
 
     public void deleteEvent(Long eventId) {

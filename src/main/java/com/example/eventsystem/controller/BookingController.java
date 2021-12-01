@@ -36,8 +36,9 @@ public class BookingController {
         return bookingService.getEventBookings(eventId);}
 
     @PostMapping
-    public void addNewBooking(@RequestBody Booking booking) {
+    public Booking addNewBooking(@RequestBody Booking booking) {
         bookingService.addNewBooking(booking);
+        return getSingleBooking(booking.getId());
     }
 
     @DeleteMapping (path = "{bookingId}")
@@ -46,10 +47,11 @@ public class BookingController {
     }
 
     @PutMapping(path = "{bookingId}")
-    public void updateBooking (
+    public Booking updateBooking (
             @PathVariable("bookingId") Long bookingId,
             @RequestParam(required = false) Integer tickets ) {
         bookingService.updateBooking(bookingId, tickets);
+        return getSingleBooking(bookingId);
 
     }
 

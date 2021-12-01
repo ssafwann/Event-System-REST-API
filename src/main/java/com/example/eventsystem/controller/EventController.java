@@ -31,8 +31,9 @@ public class EventController {
     public Event getSingleEvent(@PathVariable("eventId") Long eventId) {return eventService.getSingleEvent(eventId);}
 
     @PostMapping
-    public void registerNewEvent(@RequestBody Event event) {
+    public Event registerNewEvent(@RequestBody Event event) {
         eventService.addNewEvent(event);
+        return getSingleEvent(event.getId());
     }
 
     @DeleteMapping (path = "{eventId}")
@@ -41,7 +42,7 @@ public class EventController {
     }
 
     @PutMapping(path = "{eventId}")
-    public void updateEvent (
+    public Event updateEvent (
             @PathVariable("eventId") Long eventId,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) @DateTimeFormat (iso = DateTimeFormat.ISO.TIME) LocalTime time,
@@ -49,6 +50,7 @@ public class EventController {
             @RequestParam(required = false) String capacity,
             @RequestParam(required = false) Integer price ) {
         eventService.updateEvent(eventId,name, time,date, capacity, price);
+        return getSingleEvent(eventId);
 
     }
 

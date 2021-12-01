@@ -2,6 +2,7 @@ package com.example.eventsystem.controller;
 
 import com.example.eventsystem.model.User;
 import com.example.eventsystem.service.UserService;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +32,9 @@ public class UserController {
 
 
     @PostMapping
-    public void registerNewUser(@RequestBody User user) {
+    public User registerNewUser(@RequestBody User user) {
         userService.addNewUser(user);
+        return userService.getSingleUser(user.getId());
     }
 
     @DeleteMapping (path = "{userId}")
@@ -41,13 +43,14 @@ public class UserController {
     }
 
     @PutMapping(path = "{userId}")
-    public void updateUser (
+    public User updateUser (
             @PathVariable("userId") Long userId,
             @RequestParam(required = false) String lastName,
             @RequestParam(required = false) String firstName,
             @RequestParam(required = false) String password,
             @RequestParam(required = false) String email) {
         userService.updateUser(userId,lastName, firstName, password,email);
+        return userService.getSingleUser(userId);
 
     }
 }
