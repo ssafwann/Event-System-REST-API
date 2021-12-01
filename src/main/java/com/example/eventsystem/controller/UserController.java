@@ -22,8 +22,8 @@ public class UserController {
 
 
     @GetMapping
-    public List<User> getUser() {
-        return userService.getUser();
+    public List<User> getUserList() {
+        return userService.getUserList();
     }
 
     @GetMapping(path = "{userId}")

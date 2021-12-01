@@ -25,7 +25,7 @@ public class UserService {
     private final BookingService bookingService;
 
 
-    public List<User> getUser() {
+    public List<User> getUserList() {
         return userRepository.findAll();
     }
 
@@ -51,7 +51,7 @@ public class UserService {
         }
         else {
             // delete the user bookings as well
-            List <Booking> allBookings = bookingService.getBookingList();
+            List <Booking> allBookings = bookingService.getBookings();
             for (int i=0 ; i < allBookings.size(); i++) {
                 if (allBookings.get(i).getUserBooked().getId() == userId) {
                     bookingService.deleteBooking(allBookings.get(i).getId());

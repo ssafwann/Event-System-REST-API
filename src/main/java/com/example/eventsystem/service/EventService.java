@@ -34,8 +34,6 @@ public class EventService {
         return eventRepository.findEventById(eventId).orElseThrow();
     }
 
-
-
     public void addNewEvent(Event event) {
         Optional<Event> eventOptional = eventRepository.findEventByName(event.getName());
         if (eventOptional.isPresent()) {
@@ -53,7 +51,7 @@ public class EventService {
         }
         else {
             // delete all the event bookings
-            List <Booking> allBookings = bookingService.getBookingList();
+            List <Booking> allBookings = bookingService.getBookings();
             for (int i=0 ; i < allBookings.size(); i++) {
                 if (allBookings.get(i).getEventBooked().getId() == eventId) {
                     bookingService.deleteBooking(allBookings.get(i).getId());

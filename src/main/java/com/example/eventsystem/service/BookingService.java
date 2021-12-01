@@ -19,7 +19,7 @@ public class BookingService {
         this.bookingRepository = bookingRepository;
     }
 
-    public List<Booking> getBookingList() {
+    public List<Booking> getBookings() {
         return bookingRepository.findAll();
     }
 
@@ -27,7 +27,7 @@ public class BookingService {
         return bookingRepository.findBookingById(bookingId).orElseThrow();
     }
 
-    public List<Booking> getBookingByUser(Long userId) {
+    public List<Booking> getUserBookings(Long userId) {
         if (bookingRepository.findByUserid(userId).isEmpty()) {
             throw new IllegalStateException("The user with id " + userId + " has made no bookings.");
         }
