@@ -90,7 +90,7 @@ public class EventService {
         }
 
         // update capacity
-        if (capacity != null && capacity.length() >= 1 && !Objects.equals(event.getCapacity(), capacity)) {
+        if (capacity != null && capacity.length() >= 1 && !Objects.equals(event.getCapacity(), capacity) && Integer.parseInt(capacity) < 250) {
             event.setCapacity(capacity);
         }
 
@@ -98,6 +98,7 @@ public class EventService {
         if (price != null  && !Objects.equals(event.getPrice(), price)) {
             event.setPrice(price);
         }
+
     }
     }
 
