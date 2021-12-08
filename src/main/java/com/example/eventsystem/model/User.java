@@ -99,7 +99,12 @@ public class User {
     }
 
     public Integer getAge() {
-        return Period.between(this.dob, LocalDate.now()).getYears();
+        if (dob == null) {
+            return 0;
+        }
+        else {
+            return Period.between(this.dob, LocalDate.now()).getYears();
+        }
     }
 
     public void setAge(Integer age) {

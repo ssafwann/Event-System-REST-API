@@ -1,7 +1,6 @@
 package com.example.eventsystem.model;
 
 import org.springframework.core.annotation.Order;
-
 import javax.persistence.*;
 
 @Entity
@@ -82,8 +81,11 @@ public class Booking {
     }
 
     public Integer getAmount() {
-        amount = getEventBooked().getPrice() * tickets;
-        return amount;
+        if (getEventBooked().getPrice() != null) {
+            amount = getEventBooked().getPrice() * tickets;
+            return amount;
+        }
+        else return 0;
     }
 
     public void setAmount(Integer amount) {

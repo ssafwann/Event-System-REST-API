@@ -2,6 +2,7 @@ package com.example.eventsystem.controller;
 
 import com.example.eventsystem.model.Booking;
 import com.example.eventsystem.service.BookingService;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +39,7 @@ public class BookingController {
     @PostMapping
     public Booking addNewBooking(@RequestBody Booking booking) {
         bookingService.addNewBooking(booking);
-        return getSingleBooking(booking.getId());
+        return bookingService.getSingleBooking(booking.getId());
     }
 
     @DeleteMapping (path = "{bookingId}")

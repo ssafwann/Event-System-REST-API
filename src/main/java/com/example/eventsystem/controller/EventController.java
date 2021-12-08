@@ -33,7 +33,7 @@ public class EventController {
     @PostMapping
     public Event registerNewEvent(@RequestBody Event event) {
         eventService.addNewEvent(event);
-        return getSingleEvent(event.getId());
+        return eventService.getSingleEvent(event.getId());
     }
 
     @DeleteMapping (path = "{eventId}")
