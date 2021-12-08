@@ -1,3 +1,6 @@
+/*
+    The class which is used to do the query requests involving events
+*/
 package com.example.eventsystem.repository;
 
 import com.example.eventsystem.model.Event;

@@ -1,8 +1,10 @@
+/*
+    The class which handles all the http requests involving bookings
+ */
 package com.example.eventsystem.controller;
 
 import com.example.eventsystem.model.Booking;
 import com.example.eventsystem.service.BookingService;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

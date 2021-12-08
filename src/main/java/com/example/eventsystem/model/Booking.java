@@ -1,3 +1,6 @@
+/*
+    The class which represents the booking entity
+ */
 package com.example.eventsystem.model;
 
 import org.springframework.core.annotation.Order;

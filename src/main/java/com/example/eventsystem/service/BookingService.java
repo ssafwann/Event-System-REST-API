@@ -1,7 +1,9 @@
+/*
+    The class which is used to help in completing the http requests for bookings
+ */
 package com.example.eventsystem.service;
 
 import com.example.eventsystem.model.Booking;;
-import com.example.eventsystem.model.User;
 import com.example.eventsystem.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +15,6 @@ import java.util.*;
 public class BookingService {
 
     private final BookingRepository bookingRepository;
-
 
     @Autowired
     public BookingService(BookingRepository bookingRepository) {
@@ -78,11 +79,12 @@ public class BookingService {
         Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new IllegalStateException(
                 "Booking with id " + bookingId + " does not exists. "));
 
-        // update tickets and re-calculates amount
+        // update tickets and re-calculates the amount
         if (tickets != null  && tickets != 0 && !Objects.equals(booking.getTickets(), tickets)) {
             booking.setTickets(tickets);
             booking.setAmount(booking.getAmount());
         }
+        // if ticket amount is zero then throw error
         else {
             throw new IllegalStateException("enter a valid amount of tickets" );
         }

@@ -1,13 +1,14 @@
+/*
+    The class which handles all the API requests involving users
+ */
 package com.example.eventsystem.controller;
 
 import com.example.eventsystem.model.User;
 import com.example.eventsystem.service.UserService;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 
 @RestController
 @RequestMapping(path = "eventsystem/users")

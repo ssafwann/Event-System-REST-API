@@ -1,3 +1,6 @@
+/*
+    The class which is used to do the query requests involving bookings
+*/
 package com.example.eventsystem.repository;
 
 import com.example.eventsystem.model.Booking;
@@ -7,8 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
-
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long > {

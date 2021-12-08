@@ -1,3 +1,6 @@
+/*
+    The class which is used to help in completing the http requests for users
+*/
 package com.example.eventsystem.service;
 
 import com.example.eventsystem.model.Booking;
@@ -24,7 +27,6 @@ public class UserService {
 
     private final BookingService bookingService;
 
-
     public List<User> getUserList() {
         return userRepository.findAll();
     }
@@ -32,7 +34,6 @@ public class UserService {
     public User getSingleUser(Long userId) {
         return userRepository.findUserById(userId).orElseThrow();
     }
-
 
     public void addNewUser(User user) {
         Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
@@ -85,13 +86,12 @@ public class UserService {
 
         // update email
         if (email != null && email.length() > 0 && !Objects.equals(user.getEmail(), email)) {
-            // checks if email already exists
+            // checks if email already exists, if yes then throw an error
             Optional<User> userOptional = userRepository.findUserByEmail(email);
             if(userOptional.isPresent()) {
                 throw new IllegalStateException("The email is already taken by another user.");
             }
             user.setEmail(email);
         }
-
     }
 }

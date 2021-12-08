@@ -1,3 +1,6 @@
+/*
+    The class which is responsible for loading all the sample data that will be used for testing
+ */
 package com.example.eventsystem.config;
 
 import com.example.eventsystem.model.Booking;
@@ -66,9 +69,17 @@ public class Config {
                     LocalDate.of(2001, Month.MARCH, 2)
             );
 
+            User justin = new User(
+                    "Justin",
+                    "K Pritchett",
+                    "freeman.ondric@yahoo.com",
+                    "gohvoo0Wug",
+                    LocalDate.of(2002, Month.APRIL, 10)
+            );
+
             // this will store the data into the database
             repository.saveAll(
-                    List.of(antoinette,richard, christopher, tyler, hattie)
+                    List.of(antoinette,richard, christopher, tyler, hattie, justin)
             );
         };
     }
@@ -125,9 +136,17 @@ public class Config {
                     0
             );
 
+            Event event7 = new Event(
+                    "Job Shadowing",
+                    LocalDate.of(2021, Month.DECEMBER, 15),
+                    LocalTime.of(15,30),
+                    "40",
+                    40
+            );
+
 
             repository.saveAll(
-                    List.of(event1, event2, event3, event4, event5, event6)
+                    List.of(event1, event2, event3, event4, event5, event6, event7)
             );
         };
     }
@@ -172,8 +191,14 @@ public class Config {
                     userService.getSingleUser(2L),
                     1
             );
+
+            Booking book6 = new Booking(
+                    eventService.getSingleEvent(5L),
+                    userService.getSingleUser(6L),
+                    1
+            );
             repository.saveAll(
-                    List.of(book1,book2,book3,book4,book5)
+                    List.of(book1,book2,book3,book4,book5, book6)
             );
 
         };

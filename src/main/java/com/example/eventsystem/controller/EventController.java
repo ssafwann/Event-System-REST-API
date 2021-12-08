@@ -1,3 +1,6 @@
+/*
+    The class which handles all the API requests involving events
+ */
 package com.example.eventsystem.controller;
 
 import com.example.eventsystem.model.Event;

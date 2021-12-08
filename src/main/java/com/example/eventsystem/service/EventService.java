@@ -1,5 +1,7 @@
+/*
+    The class which is used to help in completing the http requests for events
+*/
 package com.example.eventsystem.service;
-
 
 import com.example.eventsystem.model.Booking;
 import com.example.eventsystem.model.Event;
@@ -97,7 +99,6 @@ public class EventService {
             event.setPrice(price);
         }
     }
-
     }
 
 
